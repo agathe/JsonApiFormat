@@ -5,43 +5,69 @@ HOST: http://www.google.com
 Notes API is a *short texts saving* service similar to its physical paper presence on your table.
 
 # Group Notes
-Notes related resources of the **Notes API**
 
-## Notes Collection [/notes]
-### List all Notes [GET]
-+ Response 200 (application/json)
 
-        [{
-          "id": 1, "title": "Jogging in park"
-        }, {
-          "id": 2, "title": "Pick-up posters from post-office"
-        }]
+## Notes Collection - case1: String `id` parameter [/case1/notes/{id*}]
 
-### Create a Note [POST]
-+ Request (application/json)
-
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
-## Note [/notes/{id}]
-A single Note object with all its details
+A comma separated list of `id` can be passed as parameter to fetch a list of Notes. 
 
 + Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
+    + id (required, string, `1,2`) ... String `id` of the Notes to perform action with. Has example value.
 
-### Retrieve a Note [GET]
+### Retrieves Notes [GET]
 + Response 200 (application/json)
 
-    + Header
+        { 
+          "notes" : [{
+            "id": 1, 
+            "title": "The first note in my notebook", 
+            "href" : "/notes/1",
+            }, {
+            "id": 2, 
+            "title": "The second note in my diary", 
+            "href" : "/notes/2",
+          }],
+          "meta" : {
+              "notes" : { 
+                "page" : 1,
+                "page_size" : 1,
+                "count" : 2,
+                "page_count" : 1
+                }
+            }
+        }
 
-            X-My-Header: The Value
 
-    + Body
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
+## Notes Collection - case1: Number `id` parameter [/case2/notes/{id*}]
 
-### Remove a Note [DELETE]
-+ Response 204
+A comma separated list of `id` can be passed as parameter to fetch a list of Notes. 
+
++ Parameters
+    + id (required, number, `1,2`) ... Numeric `id` of the Notes to perform action with. Has example value.
+
+### Retrieves Notes [GET]
++ Response 200 (application/json)
+
+        { 
+          "notes" : [{
+            "id": 3, 
+            "title": "The third note in my notebook", 
+            "href" : "/notes/3",
+            }, {
+            "id": 4, 
+            "title": "The fourth note in my diary", 
+            "href" : "/notes/4",
+          }],
+          "meta" : {
+              "notes" : { 
+                "page" : 1,
+                "page_size" : 1,
+                "count" : 2,
+                "page_count" : 1
+                }
+            }
+        }
+
+
+
